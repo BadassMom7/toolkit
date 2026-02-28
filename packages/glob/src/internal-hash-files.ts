@@ -4,15 +4,18 @@ import * as fs from 'fs'
 import * as stream from 'stream'
 import * as util from 'util'
 import * as path from 'path'
-import {Globber} from './glob'
+import {Globber} from './glob.js'
 
 export async function hashFiles(
   globber: Globber,
+  currentWorkspace: string,
   verbose: Boolean = false
 ): Promise<string> {
   const writeDelegate = verbose ? core.info : core.debug
   let hasMatch = false
-  const githubWorkspace = process.env['GITHUB_WORKSPACE'] ?? process.cwd()
+  const githubWorkspace = currentWorkspace
+    ? currentWorkspace
+    : (process.env['GITHUB_WORKSPACE'] ?? process.cwd())
   const result = crypto.createHash('sha256')
   let count = 0
   for await (const file of globber.globGenerator()) {

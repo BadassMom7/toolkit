@@ -1,6 +1,6 @@
 import * as http from 'http'
-import * as ifm from './interfaces'
-import {HttpClientResponse} from './index'
+import * as ifm from './interfaces.js'
+import {HttpClientResponse} from './index.js'
 
 export class BasicCredentialHandler implements ifm.RequestHandler {
   username: string
@@ -57,7 +57,8 @@ export class BearerCredentialHandler implements ifm.RequestHandler {
 }
 
 export class PersonalAccessTokenCredentialHandler
-  implements ifm.RequestHandler {
+  implements ifm.RequestHandler
+{
   token: string
 
   constructor(token: string) {

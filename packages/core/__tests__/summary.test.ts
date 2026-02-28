@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as os from 'os'
 import path from 'path'
-import {summary, SUMMARY_ENV_VAR} from '../src/summary'
+import {summary, SUMMARY_ENV_VAR} from '../src/summary.js'
 
 const testDirectoryPath = path.join(__dirname, 'test')
 const testFilePath = path.join(testDirectoryPath, 'test-summary.md')
@@ -150,10 +150,7 @@ describe('@actions/core/src/summary', () => {
   })
 
   it('adds EOL', async () => {
-    await summary
-      .addRaw(fixtures.text)
-      .addEOL()
-      .write()
+    await summary.addRaw(fixtures.text).addEOL().write()
     await assertSummary(fixtures.text + os.EOL)
   })
 
